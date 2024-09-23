@@ -2,10 +2,11 @@
 const bcrypt = require('bcrypt');
 const {DataTypes} = require('sequelize');
 
+const project = require('../models/project');
 const sequelize = require('../../config/database');
 const AppError = require('../../utils/appError');
 
-module.exports = sequelize.define(
+const user = sequelize.define(
   'users',
   {
     id: {
@@ -118,3 +119,8 @@ module.exports = sequelize.define(
     modelName: 'users',
   }
 );
+
+user.hasMany(project, {foreignKey: 'createdBy'});
+project.belongsTo(user, {foreignKey: 'createdBy'});
+
+module.exports = user;
