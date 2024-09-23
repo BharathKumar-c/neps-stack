@@ -46,26 +46,26 @@ Open Source
 
 ## Topics Covered
 
-Project Overview
-Project Setup
-Create Express Server
-Postman Setup
-Folder Structure
-Setup Project Env
-Setup SequelizeORM
-Generate Model and Migration file
-Signup Process
-Password Validation and Encrption
-JsonWebToken
-Login Process
-Global Error Handler
-Code Refactoring
-Validation and Constraints
-Project Model
-Authentication
-Authorization
-Association
-Seeder
+Project Overview,
+Project Setup,
+Create Express Server,
+Postman Setup,
+Folder Structure,
+Setup Project Env,
+Setup SequelizeORM,
+Generate Model and Migration file,
+Signup Process,
+Password Validation and Encrption,
+JsonWebToken,
+Login Process,
+Global Error Handler,
+Code Refactoring,
+Validation and Constraints,
+Project Model,
+Authentication,
+Authorization,
+Association,
+Seeder.
 
 ## Author
 
