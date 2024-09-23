@@ -2,6 +2,7 @@ const project = require('../db/models/project');
 const catchAsync = require('../utils/catchAsync');
 
 const createProject = catchAsync(async (req, res, next) => {
+  const authUserId = req.user.id;
   const {
     title,
     isFeatured,
@@ -24,7 +25,7 @@ const createProject = catchAsync(async (req, res, next) => {
     productUrl,
     category,
     tags,
-    createdBy: 1,
+    createdBy: authUserId,
   });
 
   return res.status(201).json({

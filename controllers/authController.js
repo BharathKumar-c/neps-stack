@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const users = require('../db/models/user');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const user = require('../db/models/user');
 
 const generateToken = (payload) => {
   return jwt.sign(payload, process.env.JWT_SECRET_KEY, {
@@ -64,4 +65,31 @@ const login = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports = {signup, login};
+const authentication = catchAsync(async (req, res, next) => {
+  let idToken = '';
+  // 1. get the token from headers
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    idToken = req.headers.authorization.split(' ')[1];
+  }
+  if (!idToken) {
+    return next(new AppError('Please login to get access', 401));
+  }
+
+  // 2. token verification
+  const tokenDetail = jwt.verify(idToken, process.env.JWT_SECRET_KEY);
+
+  // 3. get the user detail from
+  const freshUser = await user.findByPk(tokenDetail.id);
+
+  if (!freshUser) {
+    return next(new AppError('User no longer exists', 400));
+  }
+
+  req.user = freshUser;
+  return next();
+});
+
+module.exports = {signup, login, authentication};
