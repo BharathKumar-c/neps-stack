@@ -5,6 +5,7 @@ const catchAsync = require('./utils/catchAsync');
 const AppError = require('./utils/appError');
 const {globalErrorHandler} = require('./controllers/errorController');
 const authRouter = require('./routes/authRoutes');
+const projectRouter = require('./routes/projectRoutes');
 
 const app = express();
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.json());
 
 /* all routes will be here */
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/projects', projectRouter);
 
 app.use(
   '*',
