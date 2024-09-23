@@ -5,6 +5,7 @@ const catchAsync = require('./utils/catchAsync');
 const AppError = require('./utils/appError');
 const {globalErrorHandler} = require('./controllers/errorController');
 const authRouter = require('./routes/authRoutes');
+const userRouter = require('./routes/userRoutes');
 const projectRouter = require('./routes/projectRoutes');
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 /* all routes will be here */
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/projects', projectRouter);
+app.use('/api/v1/user', userRouter);
 
 app.use(
   '*',
