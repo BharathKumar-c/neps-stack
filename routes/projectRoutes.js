@@ -1,7 +1,11 @@
 const router = require('express').Router();
-const {authentication} = require('../controllers/authController');
-const {createProject} = require('../controllers/projectController');
+const {authentication, restrictTo} = require('../controllers/authController');
+const {
+  createProject,
+  getAllProject,
+} = require('../controllers/projectController');
 
-router.post('/', authentication, createProject);
+router.post('/', authentication, restrictTo('0'), createProject);
+router.get('/', authentication, getAllProject);
 
 module.exports = router;

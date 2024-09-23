@@ -1,4 +1,5 @@
 const project = require('../db/models/project');
+const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 const createProject = catchAsync(async (req, res, next) => {
@@ -34,4 +35,15 @@ const createProject = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports = {createProject};
+const getAllProject = catchAsync(async (req, res, next) => {
+  const projects = await project.findAll();
+  if (!projects) {
+    return next(new AppError('Project not yet created', 400));
+  }
+  return res.status(200).json({
+    status: 'success',
+    data: projects,
+  });
+});
+
+module.exports = {createProject, getAllProject};
