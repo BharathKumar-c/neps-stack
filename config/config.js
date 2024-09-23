@@ -9,6 +9,7 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
+    sessionStorage: 'sequelize',
   },
   test: {
     username: 'root',
@@ -24,5 +25,6 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
+    sessionStorage: 'sequelize',
   },
 };
